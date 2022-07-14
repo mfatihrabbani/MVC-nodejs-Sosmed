@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login page</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<style type="text/css">
+	.container{
+		width: 500px;
+      	border: 1px solid grey;
+	}
+	#form{
+		margin-top: 10px;
+      	margin-left: 10px;
+      	margin-bottom: 10px;
+      	margin-right: 10px;
+	}
+</style>
+<body>
+
+  	<% if(error){ %>
+    <div class="text-center">
+      <div class="alert alert-danger" role="alert"><%= message %></div>
+    </div>
+  	<% } %>
+
+  	<div class="container">
+      <form id="form" action="/login" method="POST">
+  <div class="mb-3 ml-10 align-items-center">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" required>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password">
+  </div>
+  <div id="forgot">
+  	<a href="">
+  		<h6>Forgot Password</h6>
+  	</a>
+  	
+  </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  
+</form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>
