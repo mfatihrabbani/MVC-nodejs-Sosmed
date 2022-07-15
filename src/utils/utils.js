@@ -25,6 +25,27 @@ export const failedMessage = (message) => {
 	return data;
 }
 
+export const failedMessageData = (message, title) => {
+	const data = {
+		status: false,
+		data:{
+			message,
+			title
+		}
+	}
+
+	return data;
+}
+
+export const successData = (data) => {
+	const dataResponse = {
+		status: true,
+		data
+	}
+
+	return dataResponse
+}
+
 export const generateToken = (data) => {
 	const {id, username, sesionId} = data;
 	try{
