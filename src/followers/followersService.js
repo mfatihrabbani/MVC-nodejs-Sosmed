@@ -58,7 +58,7 @@ export const followUser = async (data) => {
 export const checkFollowing = async (idUser, id) => {
 	try{
 		const checkFollowed = await Followers.findOne({where:{[Op.and]:[{id_user: idUser}, {following: id}]}});
-		if(checkFollowed == null) return true;
+		if(checkFollowed != null) return true;
 		return false;
 	}catch(error){
 		console.log(error);
