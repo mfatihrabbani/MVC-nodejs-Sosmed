@@ -6,6 +6,23 @@
 	<title><%= title %></title>
 </head>
 <body>
+	<% if(error) { %>
+		<h1>User NOT found</h1>	
 
+	<% }else{ %>
+	<h1>followers <%= followers %></h1>
+	<h1>followings <%= followings %></h1>
+
+	<% if(owner){ %>
+	<a href="http://localhost:3000/profile">MY PROFILE</a>
+	<% )else{ %>
+
+	<% if(!statusFollow) %>
+	<h1>Unfollow</h1>
+	<% }else{ %>
+	<h1>Follow</h1>
+	<%>
+	<% } %>
+	<% } %>
 </body>
 </html>
