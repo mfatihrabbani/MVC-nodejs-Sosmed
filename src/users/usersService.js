@@ -1,4 +1,5 @@
 import Users from "./usersModel.js";
+import Profile from "../profile/profileModel.js"
 import {parsingResult, hashPasswords, generateId, failedMessage, generateToken} from "../utils/utils.js";
 import bcrypt from "bcrypt";
 import { Op } from "sequelize";
@@ -24,6 +25,7 @@ export const registerUser = async (data) => {
 		const hashPassword = await bcrypt.hash(password, 10)
 		const id = generateId();
 		const result = await Users.create({id_user: id, username, email, password: hashPassword});
+		await Profile.create({id_user: id});
 		return {status: true}
 	}catch(error){
 		console.log(error)
