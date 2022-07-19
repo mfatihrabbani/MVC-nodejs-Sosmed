@@ -1,4 +1,4 @@
-import {findAllFollowers} from "./followersService.js"
+import {findAllFollowers, followUser} from "./followersService.js"
 
 export const followersList = async (req, res) => {
 	const {username} = req.params;
@@ -25,12 +25,12 @@ export const followingsList = async (req, res) => {
 
 export const followUsers = async (req, res) => {
 	const {id} = req.user;
-	const {idFollowing} = req.params;
+	const {idFollowing,username} = req.params;
 	try{
 		const data = {id, idFollowing};
 		const result = await followUser(data);
 
-		res.status
+		res.status(201).redirect(`/${username}`);
 	}catch(error){
 
 	}

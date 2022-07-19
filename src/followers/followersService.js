@@ -8,7 +8,7 @@ export const findAllFollowers = async (username) => {
 	try{
 		const getUsername = await checkUsername(username)
 		if(getUsername == null) return failedMessage("Username not found")
-		const getFollowers = await Followers.findAll({include: User},{
+		const getFollowers = await Followers.findAll({include:[{model: user, required: true}]},{
 			attributes: ["id_user", "following"],
 			where:{
 				following: resultUsername.id_user,
@@ -50,6 +50,7 @@ export const followUser = async (data) => {
 		const checkFollowed = await Followers.findOne({where:{[Op.and]:[{id_user: id}, {following: idFollowing}]}});
 		if(checkFollowed != null) return failedMessage("You already follow this user");
 		await Followers.create({id_user: id, following: idFollowing});
+		return true;
 	}catch(error){
 		console.log(error);
 	}
