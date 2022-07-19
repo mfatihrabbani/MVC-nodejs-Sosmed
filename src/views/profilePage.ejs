@@ -9,19 +9,24 @@
 	<% if(error) { %>
 		<h1>User NOT found</h1>	
 
-	<% }else{ %>
+	<% }else { %>
+	<h1>Name : <%= name %></h1>
+	<h1>Bio : <%= bio %></h1>
+	<a href="<%= link %>"><%= link %></a>
 	<h1>followers <%= followers %></h1>
 	<h1>followings <%= followings %></h1>
 
-	<% if(owner){ %>
+	<% if(owner) { %>
 	<a href="http://localhost:3000/profile">MY PROFILE</a>
-	<% )else{ %>
+	<% } else{ %>
 
-	<% if(!statusFollow) %>
+	<% if(!statusFollow) {%>
 	<h1>Unfollow</h1>
 	<% }else{ %>
-	<h1>Follow</h1>
-	<%>
+	<form action="/follow/<%= id %>/<%= title %>">
+		<button type="submit">Follow</button>
+	</form>
+	<% } %>
 	<% } %>
 	<% } %>
 </body>
