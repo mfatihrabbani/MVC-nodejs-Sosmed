@@ -1,6 +1,9 @@
 import express from "express";
-import {} from "./profileService.js";
+import {renderProfile} from "./profileController.js";
+import {identifyUser, auth} from "../middlewares/middlewares.js"
 
 const router = express.Router();
 
-router.get("/:username", renderProfile)
+router.get("/:username", [identifyUser], renderProfile);
+
+export default router;
