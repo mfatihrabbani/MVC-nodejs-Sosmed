@@ -15,14 +15,17 @@ const Profile = sequelize.define("Profile", {
 	name: {
 		type: DataTypes.STRING,
 		allowNull: true,
+		defaultValue: " "
 	},
 	bio : {
 		type: DataTypes.TEXT,
 		allowNull: true,
+		defaultValue: " ",
 	},
 	link: {
 		type: DataTypes.STRING,
-		allowNull: true
+		allowNull: true,
+		defaultValue: " "
 	}
 });
 
