@@ -96,11 +96,11 @@
 	<% } else{ %>
 
 	<% if(statusFollow) {%>
-	<form action="users/unfollow/<%= id %>/username/<%= title %>" method="POST">
+	<form action="/users/unfollow/<%= id %>/username/<%= title %>" method="POST">
 		<button type="submit" class="btn btn-light">Unfollow</button>
 	</form>
 	<% }else{ %>
-	<form action="users/follow/<%= id %>/username/<%= title %>" method="POST">
+	<form action="/users/follow/<%= id %>/username/<%= title %>" method="POST">
 		<button type="submit" class="btn btn-primary">Follow</button>
 	</form>
 	<% } %>
