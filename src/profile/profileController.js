@@ -1,4 +1,4 @@
-import {getData} from "./profileService.js";
+import {getData, updateProfile, getProfile} from "./profileService.js";
 
 
 export const renderProfile = async (req, res) => {
@@ -18,3 +18,27 @@ export const renderProfile = async (req, res) => {
 	}
 }
 
+export const updateProfiles = async (req, res) => {
+	const {id, username} = req.user;
+	const {name, bio, link} = req.body;
+	const data = {id, name, bio, link}
+	try{
+		const update = await updateProfile(data);
+		console.log(update);
+		res.status(201).redirect(`/p/${username}`);
+	}catch(error){
+		console.log(error);
+	}
+}
+
+export const renderUpdateProfile = async (req, res) => {
+	const {id, username} = req.user;
+	try{
+		const result =  await getProfile(id);
+		console.log(result)
+		const {name, bio, link} = result;
+		res.status(200).render("updateProfilePage.ejs", {title: username, name, bio, link});
+	}catch(error){
+		console.log(error)
+	}
+}

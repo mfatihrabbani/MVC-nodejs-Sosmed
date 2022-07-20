@@ -27,11 +27,22 @@ export const getData = async (username, id) => {
 	}
 }
 
-export const getProfile = async (id) => {
+export const updateProfile = async (data) => {
 	try{
-		
-
+		const {id, name , bio, link} = data;
+		const update = await Profile.update({name, bio, link}, {where:{id_user:id}});
+		return parsingResult(update);
 	}catch(error){
 		console.log(error);
 	}
+}
+
+export const getProfile = async (id) => {
+	try{
+		const result = await Profile.findOne({where: {id_user: id}});
+		console.log(parsingResult(result));
+		return parsingResult(result);
+	}catch(error){
+		console.log(error);
+	}	
 }
