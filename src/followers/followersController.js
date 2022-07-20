@@ -31,7 +31,7 @@ export const followUsers = async (req, res) => {
 		const data = {id, idFollowing};
 		const result = await followUser(data);
 
-		res.status(201).redirect(`/${username}`);
+		res.status(201).redirect(`/p/${username}`);
 	}catch(error){
 
 	}
@@ -46,7 +46,7 @@ export const unFollowUsers = async (req, res) => {
 		console.log(data);
 		const result = await unFollowUser(data);
 
-		res.status(201).redirect(`/${username}`);
+		res.status(201).redirect(`/p/${username}`);
 	}catch(error){
 		console.log(error)
 	}
