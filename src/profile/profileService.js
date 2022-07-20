@@ -9,15 +9,19 @@ export const getData = async (username, id) => {
 		const getUsername = await checkUsername(username);
 		if(getUsername == null) return failedMessage("User not found")
 		const profile = await Profile.findOne({where: {id_user: getUsername.id_user}});
-		let totalFollowers;
-		let totalFollowings;
 		const statusFollow = await checkFollowing(id, getUsername.id_user)
 		const followers = await findAllFollowers(username);
+		console.log(followers);
 		const followings = await findAllFollowings(username);
-		if(followers.length == 0) totalFollowers = 0;
-		if(followings.length == 0) totalFollowings = 0;
+		console.log(followings)
+		let totalFollowers = followers.data.length;
+		let totalFollowings = followings.data.length;
+		if(totalFollowers == 0) totalFollowers = "0";
+		if(totalFollowings == 0) totalFollowings = "0";
 		let { name, bio, link} = profile;
-		return {status: true,totalFollowers, totalFollowings,statusFollow, id: getUsername.id_user, name, bio, link};
+		console.log(totalFollowers, totalFollowings)
+		console.log(name, bio, link)
+		return {status: true,totalFollowers, totalFollowings,statusFollow, id: getUsername.id_user, name: name || "-", bio: bio || "-", link: link || "-"};
 	}catch(error){
 		console.log(error)
 	}
