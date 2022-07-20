@@ -4,12 +4,16 @@ export const identifyUser = async (req, res, next) => {
 	try{
 		const token = req.cookies.Authorization;
 		if(!token){
-			res.user.id = null
-			req.user.isOwner = false
+			const data = {
+				id : null,
+				isOwner : false,
+			}
+			req.user = data;
 			return next();
 		}
 
-		const decoded = await jwt.verify(token, "RAHASIA");
+		let decoded = await jwt.verify(token, "RAHASIA");
+		decoded.isOwner = true;
 		req.user = decoded
 		return next();
 	}catch(error){
