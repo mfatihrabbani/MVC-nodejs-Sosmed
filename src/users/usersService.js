@@ -61,7 +61,7 @@ export const loginUser = async (data) => {
 
 export const checkUsername = async (username) => {
 	try{
-		const getUsername = await Users.findOne({where:{username}});
+		const getUsername = await Users.findOne({where:{username},attributes: ["id_user", "username"]});
 		const resultUsername =  parsingResult(getUsername);
 		return resultUsername
 	}catch(error){
