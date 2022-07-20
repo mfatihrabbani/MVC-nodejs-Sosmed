@@ -24,7 +24,7 @@ export const postLogin = async (req, res) => {
 		res.cookie("Authorization", result.token,{
 			httpOnly: true
 		});
-		res.status(200).redirect(`/${username}`)
+		res.status(200).redirect(`/p/${username}`)
 	}catch(error){
 
 	}
