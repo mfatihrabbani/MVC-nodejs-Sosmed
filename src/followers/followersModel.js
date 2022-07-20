@@ -9,7 +9,6 @@ const Followers = sequelize.define("Followers",{
 	},
 	id_user:{
 		type: DataTypes.STRING,
-		primaryKey: true,
 		allowNull: false,
 		references:{
 			model: User,
@@ -18,7 +17,7 @@ const Followers = sequelize.define("Followers",{
 	}
 });
 
-Followers.hasOne(User)
+Followers.hasOne(User, {foreignKey: "id_user"})
 Followers.sync({alter: true});
 
 
