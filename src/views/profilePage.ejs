@@ -5,29 +5,109 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><%= title %></title>
 </head>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<style type="text/css">
+	#container{
+		margin-top: 50px;
+		text-align: center;
+		border: 1px solid grey;
+		margin-right: 400px;
+		margin-left: 400px;
+	}
+
+	#username{
+		margin-top: 10px;
+		text-align: center;
+	}
+
+	#followers, #followings{
+		margin: 15px;
+		width: 40%;
+		padding: 1em;
+	}
+	#button{
+		margin: 15px;
+	}
+
+	#profile{
+		margin: 10px;
+	}
+
+	#followers{
+		float: left;
+	}
+	#followings{
+		float: right;
+	}
+
+	#follow{
+		margin
+	}
+</style>
 <body>
 	<% if(error) { %>
 		<h1>User NOT found</h1>	
 
 	<% }else { %>
-	<h1>Name : <%= name %></h1>
-	<h1>Bio : <%= bio %></h1>
-	<a href="<%= link %>"><%= link %></a>
-	<h1>followers <%= followers %></h1>
-	<h1>followings <%= followings %></h1>
-
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Profile </a>
+      <a class="nav-item nav-link active" href="#">Search </a>
+    </div>
+  </div>
+</nav>
+	<div id="container">
+		<div id="username">
+			<h3>@<%= title %></h3>
+		</div>
+		<div id="follow">
+		<div id="followers">
+			<h3><%= followers %></h3> 
+			<h1>Followers</h1>
+		</div>
+		<div id="followings">
+			<h3> <%= followings %></h3>
+			<h1>Followings</h1>
+		</div>
+		</div>
+	<div id="profile">
+		<h4>Name</h4>
+		<h5><%= name %></h5>
+		<h4>Bio</h4>
+		<h5> <%= bio %></h5>
+		<a href="<%= link %>">
+			<button type="button" class="btn btn-link"><%= link %></button>
+		</a>
+	</div>
+	
+	<div id="button">
+		
+	
 	<% if(owner) { %>
-	<a href="http://localhost:3000/profile">MY PROFILE</a>
+
+	<a href="http://localhost:3000/profile">
+		<button type="button" class="btn btn-secondary">Edit Profile</button>
+	</a>
 	<% } else{ %>
 
-	<% if(!statusFollow) {%>
-	<h1>Unfollow</h1>
+	<% if(statusFollow) {%>
+	<form action="users/unfollow/<%= id %>/username/<%= title %>" method="POST">
+		<button type="submit" class="btn btn-light">Unfollow</button>
+	</form>
 	<% }else{ %>
-	<form action="/follow/<%= id %>/<%= title %>">
-		<button type="submit">Follow</button>
+	<form action="users/follow/<%= id %>/username/<%= title %>" method="POST">
+		<button type="submit" class="btn btn-primary">Follow</button>
 	</form>
 	<% } %>
 	<% } %>
 	<% } %>
+	</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
