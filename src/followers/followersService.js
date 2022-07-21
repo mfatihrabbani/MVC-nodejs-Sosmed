@@ -8,12 +8,9 @@ export const FollowersList = async (username) => {
 	try{
 		const getUsername = await checkUsername(username)
 		if(getUsername == null) return failedMessage("Username not found")
-		const getFollowers = await Followers.findAll({
-			//include:[{model: Users, required: true, attributes:["id_user", "username"]}],
-			attributes: ["id_user", "following"],
-			where:{
-				following: getUsername.id_user,
-			}
+		const getFollowers = await Users.findAll({
+			include:[{model: Followers, required: false, attributes:["id_user", "following"], where:{following: getUsername.id_user}}],
+			attributes: ["id_user", "username"]
 		});
 		const result = parsingResult(getFollowers);
 		console.log(result);
