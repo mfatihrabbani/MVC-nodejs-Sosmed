@@ -3,28 +3,52 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= title %></title>
+    <title>Followers -<%= title %></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   </head>
+  <style type="text/css">
+    .container-follower{
+      margin-top: 50px;
+      margin-right: 500px;
+      margin-left: 500px;
+
+    }
+  </style>
   <body>
     <div class="container">
+      <% if(error) { %>
+        <div class="alert alert-danger text-center m-5" role="alert">
+            <%= message %>
+        </div>
+      <% }else { %>
+    </div>
+    <div class="container-follower">
+      <div class="m-5">       
       <table class="table">
   <thead>
-    <tr>s
-      <th scope="col">First</th>
-      <th scope="col">Followers</th>
+    <tr>
+      <th scope="col" class="text-center">No</th>
+      <th scope="col" class="text-center">Followers</th>
     </tr>
   </thead>
-  <% data.map((x, index) => { %>
+ 
   <tbody>
+     <% data.map((x, index) => { %>
     <tr>
-      <th scope="row"><%= index + 1 %></th>
-      <td scope="row"><%= x.username %></td>
+      <th scope="row" class="text-center"><%= index + 1 %></th>
+        <td scope="row" class="text-center">
+      <a href="http://localhost:3000/p/<%= x.followers.username %>" style="color:black;">
+            <%= x.followers.username %>
+      </a>
+          </td>
     </tr>
+    <% }) %>
   </tbody>
 </table>
-<% }) %>
-    </div>      
+      </div>
+
+    </div>
+    <% } %>     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   </body>
 </html>
