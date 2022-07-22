@@ -15,6 +15,7 @@ export const renderProfile = async (req, res) => {
 		return res.status(200).render("profilePage.ejs",{title: username, error: false, owner: true, followers: data.totalFollowers, followings: data.totalFollowings, id: data.id, name : data.name, bio: data.bio, link: data.link});
 	}catch(error){
 		console.log(error);
+		res.status(500).render("404Page.ejs");
 	}
 }
 
@@ -28,6 +29,7 @@ export const updateProfiles = async (req, res) => {
 		res.status(201).redirect(`/p/${username}`);
 	}catch(error){
 		console.log(error);
+		res.status(500).render("404Page.ejs");
 	}
 }
 
@@ -40,5 +42,6 @@ export const renderUpdateProfile = async (req, res) => {
 		res.status(200).render("updateProfilePage.ejs", {title: username, name, bio, link});
 	}catch(error){
 		console.log(error)
+		res.status(500).render("404Page.ejs");
 	}
 }
