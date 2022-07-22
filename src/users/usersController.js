@@ -10,7 +10,7 @@ export const postRegister = async (req, res) => {
 		if(!validate.status) return res.status(404).render("registerPage.ejs",{error: true, message: validate.message});
 		return res.status(201).redirect("/login")
 	}catch(error){
-
+		res.status(500).render("404Page.ejs");
 	}
 }
 
@@ -26,7 +26,7 @@ export const postLogin = async (req, res) => {
 		});
 		res.status(200).redirect(`/p/${username}`)
 	}catch(error){
-
+		res.status(500).render("404Page.ejs");
 	}
 }
 
