@@ -12,12 +12,15 @@ const Followers = sequelize.define("Followers",{
 		allowNull: false,
 		references:{
 			model: User,
+			foreignKey: "id_user",
 			key: "id_user"
 		}
 	}
 });
 
-Followers.hasOne(User, {foreignKey: "id_user"})
+Followers.belongsTo(User, {as: "followers",foreignKey: "id_user"});
+Followers.belongsTo(User, {as: "followings",foreignKey: "following"});
+//User.belongsTo(Followers. {foreignKey: "id_user"});
 Followers.sync({alter: true});
 
 
