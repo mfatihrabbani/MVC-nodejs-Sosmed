@@ -7,14 +7,15 @@ import {failedMessage, parsingResult, successData, failedMessageData} from "../u
 export const FollowersList = async (username) => {
 	try{
 		const getUsername = await checkUsername(username)
-		if(getUsername == null) return failedMessage("Username not found")
-		const getFollowers = await Users.findAll({
-			include:[{model: Followers, required: false, attributes:["id_user", "following"], where:{following: getUsername.id_user}}],
-			attributes: ["id_user", "username"]
+		if(getUsername == null) return failedMessageData("Username not found", "USER NOT FOUND")
+		const getFollowers = await Followers.findAll({
+			include:[{model: Users, required: false, as: "followers", attributes:["id_user", "username"]}],
+			attributes: ["id_user", "following"],
+			where:{following: getUsername.id_user}
 		});
 		const result = parsingResult(getFollowers);
-		console.log(result);
-		if(result.length == 0) return failedMessageData("You dont have followers", getUsername.username);
+		console.log("result ", result);
+		if(result.length == 0) return failedMessageData("No one followers", getUsername.username);
 		return successData(result);
 	}catch(error){
 		console.log(error)
@@ -25,8 +26,9 @@ export const FollowersList = async (username) => {
 export const FollowingsList = async (username) => {
 	try{
 		const getUsername = await checkUsername(username)
-		if(getUsername == null) return failedMessage("Username not found not found")
+		if(getUsername == null) return failedMessageData("Username not found", "USER NOT FOUND")
 		const getFollowings = await Followers.findAll({
+			include:[{model: Users, required: false, as: "followings", attributes:["id_user", "username"]}],
 			attributes: ["id_user", "following"],
 			where:{
 				id_user: getUsername.id_user
@@ -34,7 +36,7 @@ export const FollowingsList = async (username) => {
 		});
 		const result = parsingResult(getFollowings);
 		console.log(result);
-		if(result.length == 0) return failedMessageData("You not following People", getUsername.username);
+		if(result.length == 0) return failedMessageData("No one following People", getUsername.username);
 		return successData(result);
 	}catch(error){
 		console.log(error)
