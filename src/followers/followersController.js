@@ -4,11 +4,12 @@ export const followersList = async (req, res) => {
 	const {username} = req.params;
 	try{
 		const followers = await FollowersList(username);
-		if(!followers.status) return res.status(404).render("followersListPage.ejs", {error: true, title: username ,message: followers.message});
+		console.log(followers);
+		if(!followers.status) return res.status(404).render("followersListPage.ejs", {error: true, title: username ,message: followers.data.message});
 		return res.status(200).render("followersListPage.ejs", {error: false, title: username, data: followers.data})
 	}catch(error){
 		console.log(error);
-
+		res.status(500).render("404Page.ejs");
 	}
 }
 
@@ -16,7 +17,8 @@ export const followingsList = async (req, res) => {
 	const {username} = req.params;
 	try{
 		const followings = await FollowingsList(username);
-		if(!followings.status) return res.status(404).render("followingsListPage.ejs", {error: true, title: username, message: followings.message});
+		console.log(followings)
+		if(!followings.status) return res.status(404).render("followingsListPage.ejs", {error: true, title: username, message: followings.data.message});
 		return res.status(200).render("followingsListPage.ejs", {error: false, title: username ,data: followings.data});
 	}catch(error){
 		console.log(error);
@@ -33,7 +35,7 @@ export const followUsers = async (req, res) => {
 
 		res.status(201).redirect(`/p/${username}`);
 	}catch(error){
-
+		res.status(500).render("404Page.ejs");
 	}
 }
 
@@ -48,6 +50,7 @@ export const unFollowUsers = async (req, res) => {
 
 		res.status(201).redirect(`/p/${username}`);
 	}catch(error){
-		console.log(error)
+		console.log(error);
+		res.status(500).render("404Page.ejs");
 	}
 }
